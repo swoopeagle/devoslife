@@ -1,0 +1,52 @@
+<body>
+    <h1>Devos</h1>
+    <p>Custom daily devotionals.</p>
+  
+    <form
+    action="https://formspree.io/f/mlgrvlek"
+    method="POST"
+  >
+    <input
+      type="text"
+      name="name"
+      
+      placeholder="Your name"
+      required
+    />
+  
+    <input
+      type="email"
+      name="email"
+      placeholder="Your email"
+      required
+    />
+  
+    <button type="submit">Get Early Access</button>
+  </form>
+  
+    <p id="success-message" style="display:none;">
+      Thanks for joining the waitlist!
+    </p>
+  
+    <style>
+      form {
+        max-width: 400px;
+        margin: 40px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      input {
+        padding: 14px;
+        font-size: 1rem;
+      }
+      button {
+        padding: 14px;
+        font-size: 1rem;
+        background: black;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </body>
