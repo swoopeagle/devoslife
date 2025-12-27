@@ -1,52 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Join the Waitlist</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
 <body>
-    <h1>Devos</h1>
-    <p>Custom daily devotionals.</p>
-  
-    <form
-    action="https://formspree.io/f/mlgrvlek"
-    method="POST"
-  >
-    <input
-      type="text"
-      name="name"
-      
-      placeholder="Your name"
-      required
-    />
-  
-    <input
-      type="email"
-      name="email"
-      placeholder="Your email"
-      required
-    />
-  
-    <button type="submit">Get Early Access</button>
+<main class="container">
+  <h1>Join our list</h1>
+  <form id="waitlistForm">
+    <label for="name">
+      Name
+      <input type="text" id="name" name="name" required>
+    </label>
+
+    <label for="email">
+      Email
+      <input type="email" id="email" name="email" required>
+    </label>
+
+    <button type="submit">Subscribe</button>
   </form>
-  
-    <p id="success-message" style="display:none;">
-      Thanks for joining the waitlist!
-    </p>
-  
-    <style>
-      form {
-        max-width: 400px;
-        margin: 40px auto;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-      input {
-        padding: 14px;
-        font-size: 1rem;
-      }
-      button {
-        padding: 14px;
-        font-size: 1rem;
-        background: black;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
-    </style>
-  </body>
+  <p id="message"></p>
+</main>
+
+<script>
+  const form = document.getElementById('waitlistForm');
+  const message = document.getElementById('message');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    message.innerText = "Sending...";
+
+    // Send to YOUR Vercel API, not Airtable directly
+    const res = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      message.innerText = "Success! You're on the list.";
+      form.reset();
+    } else {
+      message.innerText = "Something went wrong.";
+    }
+  });
+</script>
+</body>
+</html>
