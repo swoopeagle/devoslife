@@ -1,54 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Join the Waitlist</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-</head>
-<body>
-<main class="container">
-  <h1>Join our list</h1>
-  <form id="waitlistForm">
-    <label for="name">
-      Name
-      <input type="text" id="name" name="name" required>
-    </label>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>devos.life</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
-    <label for="email">
-      Email
-      <input type="email" id="email" name="email" required>
-    </label>
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
 
-    <button type="submit">Subscribe</button>
-  </form>
-  <p id="message"></p>
-</main>
+					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+						<div class="content">
+							<h1>devos.life</h1>
+							<p class="major">A (modular, highly tweakable) responsive one-page template designed by <a href="https://html5up.net">HTML5 UP</a> and released for free under the <a href="https://html5up.net/license">Creative Commons</a>.</p>
+							<ul class="actions stacked">
+								<li><a href="#waitlist" class="button big wide smooth-scroll-middle">Get Started</a></li>
+							</ul>
+						</div>
+						<div class="image">
+							<img src="images/banner.jpg" alt="" />
+						</div>
+					</section>
 
-<script>
-  const form = document.getElementById('waitlistForm');
-  const message = document.getElementById('message');
+					<section class="wrapper style1 align-center" id="waitlist">
+						<div class="inner medium">
+							<h2>Get in touch</h2>
+							<form method="post" action="#" id="waitlistForm">
+								<div class="fields">
+									<div class="field half">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" value="" required/>
+									</div>
+									<div class="field half">
+										<label for="email">Email</label>
+										<input type="email" name="email" id="email" value="" required/>
+									</div>
+								</div>
+								<ul class="actions special">
+									<li><input type="submit" name="submit" id="submit" value="Join Waitlist" /></li>
+								</ul>
+							</form>
+							<p id="message"></p>
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
+						</div>
+					</section>
 
-    message.innerText = "Sending...";
+				<!-- Footer -->
+					<footer class="wrapper style1 align-center">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								<li><a href="#" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+							</ul>
+							<p>&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						</div>
+					</footer>
 
-    // Send to YOUR Vercel API, not Airtable directly
-    const res = await fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+			</div>
 
-    if (res.ok) {
-      message.innerText = "Success! You're on the list.";
-      form.reset();
-    } else {
-      message.innerText = "Something went wrong.";
-    }
-  });
-</script>
-</body>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				const form = document.getElementById('waitlistForm');
+				const message = document.getElementById('message');
+
+				form.addEventListener('submit', async (e) => {
+					e.preventDefault();
+					const formData = new FormData(form);
+					const data = Object.fromEntries(formData);
+
+					message.innerText = "Sending...";
+
+					// Send to YOUR Vercel API, not Airtable directly
+					const res = await fetch('/api/submit', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(data)
+					});
+
+					if (res.ok) {
+						message.innerText = "Success! You're on the list.";
+						form.reset();
+					} else {
+						message.innerText = "Something went wrong.";
+					}
+				});
+			</script>
+
+	</body>
 </html>
